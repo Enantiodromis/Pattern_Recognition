@@ -1,5 +1,6 @@
 import numpy as np
 from prettytable import PrettyTable
+from sklearn import preprocessing
 
 # DEFINING FUNCTION FOR WIDROW-HOFF LEARNING ALGORITHM:
 # The Widrow-Hoff Learning Algorithm is applied to the following data in order to learn the parameters 
@@ -12,25 +13,28 @@ from prettytable import PrettyTable
 # The initial parameters values of aT = (w0, wT) = (1.0,0.0,0.0), margin vector bT = (1.0,0.5,0.5,1.5,0.5,1.0) 
 # and a learning rate of 0.1 were used.
 
-def widrow_hoff_algorithm(a, b, n, epoch, Y):
+def widrow_hoff_algorithm(a, b, n, epoch, Y, X):
     result = []
+    for i in range(len(Y)): Y[i].insert(0, 1.0)
+    
     for iter1 in range(epoch):
         for iter2 in range(len(Y)):
-            a_prev = a
-            y = Y[iter2]
-
+            # NORMALISING DATA
+            y = np.multiply(Y[iter2], X[iter2])
+         
             # CALCULATING: "aTyk"
             ay = np.dot(a, y)
-
+    
             # CALCULATING UPDATE: "aTnew=aT+η(bk−aTyk)yTk"
             update = np.zeros(len(y))
             for iter3 in range(len(y)): 
                 update[iter3] = n * (b[iter2] - ay) * y[iter3]
+            
             # ADDING UPDATED PARTS TO A
             a = np.add(a, update)
 
             # APPENDING RESULTS TO ARRAY, SPECIFICALLY FOCUSING ON 3 COLUMNS, ITERATIONS, AY AND A_NEW
-            result.append((str(iter2 + 1 + (len(Y) * iter1)),np.round(ay, 4), np.round(a, 4)))
+            result.append((str(iter2 + 1 + (len(Y) * iter1)),np.round(ay, 2), np.round(a, 2)))
             
     results_table = PrettyTable(('iteration', 'ay', 'a_new'))
     for row in result: results_table.add_row(row)
