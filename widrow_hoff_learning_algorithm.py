@@ -10,19 +10,23 @@ from sklearn import preprocessing
 
 def widrow_hoff_algorithm(a, b, n, epoch, Y, X):
     result = [] # Defining a list of results, used later for displaying in a table.
+
+    if (isinstance(Y, list) == False and isinstance(X, list) == False): Y,X = Y.tolist(), X.tolist()
+    if any(isinstance(el, list) for el in X) == False : X = [[x] for x in X]
     for i in range(len(Y)): Y[i].insert(0, 1.0) # Adding "1.0" into the first position of every element of Y used for normalisation
-    
+
     for iter1 in range(epoch): # Iterating over epoch
         for iter2 in range(len(Y)): # Iterating through ever element within Y
             # STEP 1: NORMALISING DATA
             y = np.multiply(Y[iter2], X[iter2])
+            print("This is y: " + str(y))
          
             # STEP 2: CALCULATING: "aTyk"
             ay = np.dot(a, y)
     
             # STEP 3: CALCULATING UPDATE: "aTnew=aT+η(bk−aTyk)yTk"
             update = np.zeros(len(y))
-            for iter3 in range(len(y)): 
+            for iter3 in range(len(y)):
                 update[iter3] = n * (b[iter2] - ay) * y[iter3] # η(bk−at yk) yk
             
             # STEP 4: ADDING UPDATED PARTS TO A

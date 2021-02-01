@@ -8,14 +8,14 @@ from widrow_hoff_learning_algorithm import widrow_hoff_algorithm
 # Margin vector bT=(1.0,0.5,0.5,1.5,0.5,1.0), 
 # A learning rate of 0.1. 
 
-# Initialising inputs and calling the widrow_hoff_learning_algotithm function.
-a = [1.0,0.0,0.0]
-b = [1.0,0.5,0.5,1.5,0.5,1.0]
-n = 0.1
-epoch = 2
-X = [[1],[1],[1],[-1],[-1],[-1]]
-Y = [[0.0, 2.0], [1.0, 2.0], [2.0, 1.0], [-3.0, 1.0], [-2.0, -1.0], [-3.0, -2.0]]
-widrow_hoff_algorithm(a,b,n,epoch,Y,X)
+#Initialising inputs and calling the widrow_hoff_learning_algotithm function.
+a_1 = [1.0,0.0,0.0]
+b_1 = [1.0,0.5,0.5,1.5,0.5,1.0]
+n_1 = 0.1
+epoch_1 = 2
+X_1 = [[1],[1],[1],[-1],[-1],[-1]]
+Y_1 = [[0.0, 2.0], [1.0, 2.0], [2.0, 1.0], [-3.0, 1.0], [-2.0, -1.0], [-3.0, -2.0]]
+widrow_hoff_algorithm(a_1,b_1,n_1,epoch_1,Y_1,X_1)
 
 # TRAINING DATA:
 # The Iris dataset. This dataset contains 150 samples from 3 classes. 
@@ -33,8 +33,17 @@ iris = datasets.load_iris()
 #
 # Use initial parameter values:
 # -> aT=(w0,wT)=(0.5,0.5,−2.5,1.5,−0.5)
-# -> Margin vector b in which all values are equal to 1 
+# -> Margin vector b in which all values are equal to 1 the length b == length of element of Y
 # -> A learning rate of 0.01.
 #
 # Calculate the percentage of samples for which the linear discriminant function produces the desired output 
 # (i.e. g(x)>0 for the 1st 50 samples, and g(x)≤0 for the remaining 100 samples) using the initial parameter values, and those calculated after learning for 2 epochs.
+
+# Initialising inputs and calling the widrow_hoff_learning_algotithm function.
+a_2 = [0.5,0.5,-2.5,1.5,-0.5]
+b_2 = [[1.0] for i in range(150)]
+n_2 = 0.1
+epoch_2 = 2
+X_2 = iris.target
+Y_2 = iris.data
+widrow_hoff_algorithm(a_2,b_2,n_2,epoch_2,Y_2,X_2)
