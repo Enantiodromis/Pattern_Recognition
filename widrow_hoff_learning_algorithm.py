@@ -19,7 +19,6 @@ def widrow_hoff_algorithm(a, b, n, epoch, Y, X):
         for iter2 in range(len(Y)): # Iterating through ever element within Y
             # STEP 1: NORMALISING DATA
             y = np.multiply(Y[iter2], X[iter2])
-            print("This is y: " + str(y))
          
             # STEP 2: CALCULATING: "aTyk"
             ay = np.dot(a, y)
