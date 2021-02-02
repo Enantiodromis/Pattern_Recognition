@@ -1,5 +1,6 @@
+import numpy as np
 from sklearn import datasets
-from widrow_hoff_learning_algorithm import widrow_hoff_algorithm
+from widrow_hoff_learning_algorithm import two_class_widrow_hoff_algorithm
 
 # QUESTION 1: Apply 2 epochs of the Sequential Widrow-Hoff Learning Algorithm to the training data.
 #
@@ -15,7 +16,7 @@ n_1 = 0.1
 epoch_1 = 2
 X_1 = [[1],[1],[1],[-1],[-1],[-1]]
 Y_1 = [[0.0, 2.0], [1.0, 2.0], [2.0, 1.0], [-3.0, 1.0], [-2.0, -1.0], [-3.0, -2.0]]
-widrow_hoff_algorithm(a_1,b_1,n_1,epoch_1,Y_1,X_1)
+two_class_widrow_hoff_algorithm(a_1,b_1,n_1,epoch_1,Y_1,X_1)
 
 # TRAINING DATA:
 # The Iris dataset. This dataset contains 150 samples from 3 classes. 
@@ -46,4 +47,8 @@ n_2 = 0.1
 epoch_2 = 2
 X_2 = iris.target
 Y_2 = iris.data
-widrow_hoff_algorithm(a_2,b_2,n_2,epoch_2,Y_2,X_2)
+C1_2 = [0]
+CN1_2 = [1,2]
+
+training_algo = two_class_widrow_hoff_algorithm(a_2,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2)
+#two_class_widrow_hoff_algorithm(training_algo,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2, testing = True)
