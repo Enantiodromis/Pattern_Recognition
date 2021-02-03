@@ -1,9 +1,9 @@
-import numpy as np
 from sklearn import datasets
+from k_nearest_neighbour_classifier import k_nearest_neighbour
 from widrow_hoff_learning_algorithm import two_class_widrow_hoff_algorithm
+from sklearn.model_selection import train_test_split
 
 # QUESTION 1: Apply 2 epochs of the Sequential Widrow-Hoff Learning Algorithm to the training data.
-#
 # Use initial parameters values:
 # aT=(w0,wT)=(1.0,0.0,0.0)
 # Margin vector bT=(1.0,0.5,0.5,1.5,0.5,1.0), 
@@ -16,7 +16,7 @@ n_1 = 0.1
 epoch_1 = 2
 X_1 = [[1],[1],[1],[-1],[-1],[-1]]
 Y_1 = [[0.0, 2.0], [1.0, 2.0], [2.0, 1.0], [-3.0, 1.0], [-2.0, -1.0], [-3.0, -2.0]]
-two_class_widrow_hoff_algorithm(a_1,b_1,n_1,epoch_1,Y_1,X_1)
+#two_class_widrow_hoff_algorithm(a_1,b_1,n_1,epoch_1,Y_1,X_1)
 
 # TRAINING DATA:
 # The Iris dataset. This dataset contains 150 samples from 3 classes. 
@@ -50,5 +50,24 @@ Y_2 = iris.data
 C1_2 = [0]
 CN1_2 = [1,2]
 
-training_algo = two_class_widrow_hoff_algorithm(a_2,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2)
-two_class_widrow_hoff_algorithm(training_algo,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2, testing = True)
+#training_algo = two_class_widrow_hoff_algorithm(a_2,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2)
+#two_class_widrow_hoff_algorithm(training_algo,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2)
+
+# QUESTION 3: Apply a K-Nearest Neighbours (kNN) classifier with the Iris dataset in order to classify the samples:
+# 
+# Sample number   Feature vector, xT
+#      1          (7.7,2.7,3.2,1.1)
+#      2          (7.8,3.4,5.4,0.8)
+#      3          (7.2,4.1,2.1,2.4)
+#      4          (5.3,4.2,4.0,1.9)
+#      5          (7.3,4.0,3.0,0.2)
+#
+# - Euclidean distance as the measure of similarity.
+# - kNN applied to the the data provided.
+# - Determine the class of each of the 5 samples in the above table using a kNN classifier
+#   for k=1 and k=5
+samples = [[7.7,2.7,3.2,1.1], [7.8,3.4,5.4,0.8], [7.2,4.1,2.1,2.4], [5.3,4.2,4.0,1.9], [7.3,4.0,3.0,0.2]]
+x = iris.data
+y = iris.target
+k_nearest_neighbour(x, y, samples)
+

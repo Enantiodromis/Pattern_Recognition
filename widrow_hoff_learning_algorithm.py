@@ -8,7 +8,7 @@ from sklearn import preprocessing
 # - For each sample, yk in the dataset in turn
 #   -> update solution: a←a+η(bk−at yk) yk
 
-def two_class_widrow_hoff_algorithm(a, b, n, epoch, Y, X, class_1 = [[]], class_neg_1 = [[]], testing = False):
+def two_class_widrow_hoff_algorithm(a, b, n, epoch, Y, X, class_1 = [[]], class_neg_1 = [[]]):
     result = [] # Defining a list of results, used later for displaying in a table
     store_a = [] # Storing newely generated a to use in calculatation of g > 0
 
@@ -55,7 +55,9 @@ def two_class_widrow_hoff_algorithm(a, b, n, epoch, Y, X, class_1 = [[]], class_
                 counter = counter + 1 # Iterating counter if value is > 0
             else: 
                 negcounter = negcounter + 1
-    percentage = (counter/(len(store_a)*len(store_a[0])))*100 # Calculating percentage of values > 0
+    percentage = (counter/((len(store_a)*len(store_a[0])+1)))*100 # Calculating percentage of values > 0
+    print("posotive counter: " + str(counter))
+    print("neg counter: " + str(negcounter))
     print(str(np.round(percentage, 2))+"%") # Printing percentage
     
     # Defining a table to display results
