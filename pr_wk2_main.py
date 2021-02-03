@@ -42,8 +42,8 @@ iris = datasets.load_iris()
 
 # Initialising inputs and calling the widrow_hoff_learning_algotithm function.
 a_2 = [0.5,0.5,-2.5,1.5,-0.5]
-b_2 = [[1.0] for i in range(150)]
-n_2 = 0.1
+b_2 = [1.0 for i in range(150)]
+n_2 = 0.01
 epoch_2 = 2
 X_2 = iris.target
 Y_2 = iris.data
@@ -51,4 +51,4 @@ C1_2 = [0]
 CN1_2 = [1,2]
 
 training_algo = two_class_widrow_hoff_algorithm(a_2,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2)
-#two_class_widrow_hoff_algorithm(training_algo,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2, testing = True)
+two_class_widrow_hoff_algorithm(training_algo,b_2,n_2,epoch_2,Y_2,X_2,C1_2,CN1_2, testing = True)

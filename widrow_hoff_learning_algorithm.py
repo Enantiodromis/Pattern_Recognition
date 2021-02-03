@@ -15,7 +15,7 @@ def two_class_widrow_hoff_algorithm(a, b, n, epoch, Y, X, class_1 = [[]], class_
     if not isinstance(Y, list) and not isinstance(X, list): Y,X = Y.tolist(), X.tolist() # Converting datasets to list if not already
     if any(isinstance(el, list) for el in X) == False : X = [[x] for x in X] # Converting X data into a list of lists if not already
     for i in range(len(Y)): Y[i].insert(0, 1.0) # Adding "1.0" into the first position of every element of Y used for normalisation
-    
+
     # BASED ON CLASS CATERGORISATION INPUTTED, THE X VALUES ARE CONVERTED TO CLASS 1 OR -1
     if len(class_1) and len(class_neg_1) != 0:
         for iter0 in range(len(X)):
@@ -28,20 +28,19 @@ def two_class_widrow_hoff_algorithm(a, b, n, epoch, Y, X, class_1 = [[]], class_
     for iter1 in range(epoch): # Iterating over epoch
         for iter2 in range(len(Y)): # Iterating through ever element within Y
             # STEP 1: NORMALISING DATA
-            y = np.multiply(Y[iter2], X[iter2]) if X[iter2] == [-1] else Y[iter2] 
-         
+            y = np.multiply(Y[iter2], X[iter2]) if X[iter2] == [-1] else Y[iter2]
+
             # STEP 2: CALCULATING: "aTyk"
             ay = np.dot(a, y)
-    
+
             # STEP 3: CALCULATING UPDATE: "aTnew=aT+η(bk−aTyk)yTk"
             update = np.zeros(len(y))
             for iter3 in range(len(y)):
                 update[iter3] = n * (b[iter2] - ay) * y[iter3] # η(bk−at yk) yk
-            
+
             # STEP 4: ADDING UPDATED PARTS TO A
             a = np.add(a, update) # a←a+η(bk−at yk) yk
 
-            round(float(np.float64(ay)), 2)
             # APPENDING RESULTS TO ARRAY, SPECIFICALLY FOCUSING ON 3 COLUMNS, ITERATIONS, AY AND A_NEW
             result.append((str(iter2 + 1 + (len(Y) * iter1)),np.round(ay, 2),np.round(a, 2)))
             #print("THIS IS THE VALUE OF a: " + str(a))
